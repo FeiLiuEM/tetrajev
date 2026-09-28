@@ -1,0 +1,3 @@
+# Figure/scoring tools (the suite runners themselves are standard-library only)
+numpy>=1.24
+matplotlib>=3.7

@@ -1,0 +1,187 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1240 760" width="1240" height="760" role="img" aria-labelledby="tj-arch-title tj-arch-desc">
+  <title id="tj-arch-title">TetraJev — system architecture</title>
+  <desc id="tj-arch-desc">Two frozen open-weight readers (Qwen3.5-27B dense and Qwen3.5-35B-A3B MoE) each read a bounded decision task twice: a letter readout over the option letters and a pair readout asking yes/no per candidate. Four per-option distributions are fused (R4, fit-free) and routed by agreement (R2: strict / unanimous / split) with calibrated release gates. Confident items are auto-released; split or low-confidence items fall back to human review. No fine-tuning, no distillation.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#0A0E1A"/>
+      <stop offset="1" stop-color="#0D1730"/>
+    </linearGradient>
+    <radialGradient id="halo" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0" stop-color="#22D3EE" stop-opacity="0.12"/>
+      <stop offset="0.6" stop-color="#A78BFA" stop-opacity="0.05"/>
+      <stop offset="1" stop-color="#22D3EE" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="hdrline" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#22D3EE" stop-opacity="0.8"/>
+      <stop offset="0.5" stop-color="#A78BFA" stop-opacity="0.25"/>
+      <stop offset="1" stop-color="#22D3EE" stop-opacity="0"/>
+    </linearGradient>
+    <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#94A3B8" stroke-opacity="0.06" stroke-width="1"/>
+    </pattern>
+    <marker id="arr" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+      <polygon points="0 0, 8 3, 0 6" fill="#7C8BA3"/>
+    </marker>
+    <marker id="arr-cyan" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+      <polygon points="0 0, 8 3, 0 6" fill="#22D3EE"/>
+    </marker>
+    <marker id="arr-violet" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+      <polygon points="0 0, 8 3, 0 6" fill="#A78BFA"/>
+    </marker>
+    <marker id="arr-amber" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+      <polygon points="0 0, 8 3, 0 6" fill="#F59E0B"/>
+    </marker>
+    <filter id="glow" x="-40%" y="-40%" width="180%" height="180%">
+      <feGaussianBlur stdDeviation="6" result="b"/>
+      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+
+  <!-- background -->
+  <rect width="1240" height="760" fill="url(#bg)"/>
+  <rect width="1240" height="760" fill="url(#grid)"/>
+  <ellipse cx="780" cy="380" rx="430" ry="300" fill="url(#halo)"/>
+
+  <!-- header -->
+  <text x="56" y="60" fill="#67E8F9" font-size="12" font-family="'SF Mono','JetBrains Mono','Noto Sans Mono',Menlo,Consolas,monospace" letter-spacing="3">TETRAJEV / SYSTEM ARCHITECTURE</text>
+  <text x="56" y="104" fill="#E8EEF9" font-size="32" font-weight="700" font-family="-apple-system,'Segoe UI',Roboto,'Noto Sans',Arial,sans-serif">Four readings. One routed decision.</text>
+  <line x1="56" y1="140" x2="1184" y2="140" stroke="url(#hdrline)" stroke-width="1"/>
+
+  <!-- top-right chips -->
+  <rect x="812" y="48" width="128" height="32" rx="6" fill="none" stroke="#94A3B8" stroke-opacity="0.30" stroke-width="1"/>
+  <text x="876" y="68" text-anchor="middle" fill="#8DA2BF" font-size="12" font-family="'SF Mono','Noto Sans Mono',Menlo,Consolas,monospace" letter-spacing="1">NO FINE-TUNING</text>
+  <rect x="952" y="48" width="136" height="32" rx="6" fill="none" stroke="#94A3B8" stroke-opacity="0.30" stroke-width="1"/>
+  <text x="1020" y="68" text-anchor="middle" fill="#8DA2BF" font-size="12" font-family="'SF Mono','Noto Sans Mono',Menlo,Consolas,monospace" letter-spacing="1">NO DISTILLATION</text>
+  <rect x="1100" y="48" width="84" height="32" rx="6" fill="none" stroke="#94A3B8" stroke-opacity="0.30" stroke-width="1"/>
+  <text x="1142" y="68" text-anchor="middle" fill="#8DA2BF" font-size="12" font-family="'SF Mono','Noto Sans Mono',Menlo,Consolas,monospace" letter-spacing="1">1&#215;24GB</text>
+
+  <!-- arrows (before boxes) -->
+  <path d="M200 360 H220 V346 H252" fill="none" stroke="#7C8BA3" stroke-width="1.4" marker-end="url(#arr)"/>
+  <path d="M200 384 H228 V446 H252" fill="none" stroke="#7C8BA3" stroke-width="1.4" marker-end="url(#arr)"/>
+  <path d="M460 346 H498" fill="none" stroke="#7C8BA3" stroke-width="1.4" marker-end="url(#arr)"/>
+  <path d="M460 450 H498" fill="none" stroke="#7C8BA3" stroke-width="1.4" marker-end="url(#arr)"/>
+  <path d="M682 372 H706" fill="none" stroke="#A78BFA" stroke-width="1.6" marker-end="url(#arr-violet)"/>
+  <path d="M818 378 H842" fill="none" stroke="#A78BFA" stroke-width="1.6" marker-end="url(#arr-violet)"/>
+  <path d="M1000 508 V530" fill="none" stroke="#22D3EE" stroke-width="1.6" marker-end="url(#arr-cyan)"/>
+  <path d="M864 460 H816 V604 H716" fill="none" stroke="#F59E0B" stroke-width="1.4" stroke-dasharray="6,4" marker-end="url(#arr-amber)"/>
+
+  <!-- arrow labels -->
+  <rect x="1006" y="512" width="104" height="18" fill="#0C1526"/>
+  <text x="1012" y="526" fill="#67E8F9" font-size="12" font-family="'SF Mono','Noto Sans Mono',Menlo,Consolas,monospace">auto-release</text>
+  <rect x="700" y="330" width="92" height="16" fill="#0C1526"/>
+  <text x="706" y="343" fill="#C4B5FD" font-size="11.5" font-family="'SF Mono','Noto Sans Mono',Menlo,Consolas,monospace">R4 fusion</text>
+  <rect x="722" y="588" width="88" height="16" fill="#0C1526"/>
+  <text x="728" y="601" fill="#FBBF24" font-size="11.5" font-family="'SF Mono','Noto Sans Mono',Menlo,Consolas,monospace">abstain</text>
+  <circle cx="864" cy="460" r="3" fill="#F59E0B"/>
+
+  <!-- INPUT -->
+  <rect x="56" y="288" width="144" height="160" rx="8" fill="#94A3B8" fill-opacity="0.06" stroke="#94A3B8" stroke-opacity="0.35" stroke-width="1"/>
+  <rect x="68" y="300" width="56" height="20" rx="4" fill="none" stroke="#94A3B8" stroke-opacity="0.40" stroke-width="0.8"/>
+  <text x="96" y="314" text-anchor="middle" fill="#8DA2BF" font-size="12" font-family="'SF Mono','Noto Sans Mono',Menlo,Consolas,monospace" letter-spacing="1">INPUT</text>
+  <text x="128" y="356" text-anchor="middle" fill="#E6EDF7" font-size="20" font-weight="600" font-family="-apple-system,'Segoe UI',Roboto,'Noto Sans',Arial,sans-serif">Task</text>
+  <text x="128" y="380" text-anchor="middle" fill="#8DA2BF" font-size="12" font-family="'SF Mono','Noto Sans Mono',Menlo,Consolas,monospace">state + options</text>
+  <rect x="68" y="396" width="24" height="24" rx="4" fill="none" stroke="#94A3B8" stroke-opacity="0.35" stroke-width="1"/>
+  <text x="80" y="412" text-anchor="middle" fill="#9AA7BD" font-size="12" font-family="'SF Mono','Noto Sans Mono',Menlo,Consolas,monospace">A</text>
+  <rect x="100" y="396" width="24" height="24" rx="4" fill="none" stroke="#94A3B8" stroke-opacity="0.35" stroke-width="1"/>
+  <text x="112" y="412" text-anchor="middle" fill="#9AA7BD" font-size="12" font-family="'SF Mono','Noto Sans Mono',Menlo,Consolas,monospace">B</text>
+  <rect x="132" y="396" width="24" height="24" rx="4" fill="none" stroke="#94A3B8" stroke-opacity="0.35" stroke-width="1"/>
+  <text x="144" y="412" text-anchor="middle" fill="#9AA7BD" font-size="12" font-family="'SF Mono','Noto Sans Mono',Menlo,Consolas,monospace">C</text>
+  <rect x="164" y="396" width="24" height="24" rx="4" fill="none" stroke="#94A3B8" stroke-opacity="0.35" stroke-width="1"/>
+  <text x="176" y="412" text-anchor="middle" fill="#9AA7BD" font-size="12" font-family="'SF Mono','Noto Sans Mono',Menlo,Consolas,monospace">D</text>
+  <text x="128" y="438" text-anchor="middle" fill="#8DA2BF" font-size="11.5" font-family="'SF Mono','Noto Sans Mono',Menlo,Consolas,monospace">K = 2 &#8230; 20</text>
+
+  <!-- READERS ZONE -->
+  <rect x="240" y="232" width="232" height="272" rx="8" fill="#94A3B8" fill-opacity="0.03" stroke="#94A3B8" stroke-opacity="0.25" stroke-width="1" stroke-dasharray="4,4"/>
+  <text x="256" y="258" fill="#67E8F9" font-size="12" font-family="'SF Mono','Noto Sans Mono',Menlo,Consolas,monospace" letter-spacing="3">READERS &#183; FROZEN</text>
+  <text x="256" y="280" fill="#8DA2BF" font-size="12" font-family="'SF Mono','Noto Sans Mono',Menlo,Consolas,monospace">open weights &#183; no training</text>
+  <rect x="252" y="300" width="208" height="92" rx="8" fill="#94A3B8" fill-opacity="0.06" stroke="#94A3B8" stroke-opacity="0.35" stroke-width="1"/>
+  <text x="264" y="320" fill="#8DA2BF" font-size="12" font-family="'SF Mono','Noto Sans Mono',Menlo,Consolas,monospace" letter-spacing="2">READER A</text>
+  <text x="356" y="348" text-anchor="middle" fill="#E6EDF7" font-size="20" font-weight="600" font-family="-apple-system,'Segoe UI',Roboto,'Noto Sans',Arial,sans-serif">Qwen3.5-27B</text>
+  <text x="356" y="372" text-anchor="middle" fill="#8DA2BF" font-size="12" font-family="'SF Mono','Noto Sans Mono',Menlo,Consolas,monospace">dense &#183; GGUF &#183; llama.cpp</text>
+  <rect x="252" y="404" width="208" height="92" rx="8" fill="#94A3B8" fill-opacity="0.06" stroke="#94A3B8" stroke-opacity="0.35" stroke-width="1"/>
+  <text x="264" y="424" fill="#8DA2BF" font-size="12" font-family="'SF Mono','Noto Sans Mono',Menlo,Consolas,monospace" letter-spacing="2">READER B</text>
+  <text x="356" y="452" text-anchor="middle" fill="#E6EDF7" font-size="20" font-weight="600" font-family="-apple-system,'Segoe UI',Roboto,'Noto Sans',Arial,sans-serif">Qwen3.5-35B-A3B</text>
+  <text x="356" y="476" text-anchor="middle" fill="#8DA2BF" font-size="12" font-family="'SF Mono','Noto Sans Mono',Menlo,Consolas,monospace">MoE &#183; GGUF &#183; llama.cpp</text>
+
+  <!-- READINGS ZONE -->
+  <rect x="504" y="232" width="176" height="272" rx="8" fill="#A78BFA" fill-opacity="0.04" stroke="#A78BFA" stroke-opacity="0.45" stroke-width="1.1"/>
+  <text x="518" y="258" fill="#C4B5FD" font-size="12" font-family="'SF Mono','Noto Sans Mono',Menlo,Consolas,monospace" letter-spacing="3">READINGS &#215;4</text>
+  <text x="518" y="280" fill="#8DA2BF" font-size="11.5" font-family="'SF Mono','Noto Sans Mono',Menlo,Consolas,monospace">2 readers &#215; 2 structures</text>
+
+  <rect x="516" y="298" width="72" height="88" rx="6" fill="#A78BFA" fill-opacity="0.07" stroke="#A78BFA" stroke-opacity="0.45" stroke-width="1"/>
+  <text x="552" y="318" text-anchor="middle" fill="#DDD6FE" font-size="12" font-family="'SF Mono','Noto Sans Mono',Menlo,Consolas,monospace">A &#183; letter</text>
+  <rect x="528" y="356" width="9" height="8" fill="#C4B5FD" fill-opacity="0.45"/>
+  <rect x="541" y="334" width="9" height="30" fill="#C4B5FD" fill-opacity="0.85"/>
+  <rect x="554" y="348" width="9" height="16" fill="#C4B5FD" fill-opacity="0.55"/>
+  <rect x="567" y="352" width="9" height="12" fill="#C4B5FD" fill-opacity="0.45"/>
+  <text x="552" y="380" text-anchor="middle" fill="#8DA2BF" font-size="10.5" font-family="'SF Mono','Noto Sans Mono',Menlo,Consolas,monospace">letter mass</text>
+
+  <rect x="596" y="298" width="72" height="88" rx="6" fill="#A78BFA" fill-opacity="0.07" stroke="#A78BFA" stroke-opacity="0.45" stroke-width="1"/>
+  <text x="632" y="318" text-anchor="middle" fill="#DDD6FE" font-size="12" font-family="'SF Mono','Noto Sans Mono',Menlo,Consolas,monospace">A &#183; pair</text>
+  <rect x="608" y="358" width="9" height="6" fill="#C4B5FD" fill-opacity="0.45"/>
+  <rect x="621" y="336" width="9" height="28" fill="#C4B5FD" fill-opacity="0.8"/>
+  <rect x="634" y="346" width="9" height="18" fill="#C4B5FD" fill-opacity="0.55"/>
+  <rect x="647" y="354" width="9" height="10" fill="#C4B5FD" fill-opacity="0.4"/>
+  <text x="632" y="380" text-anchor="middle" fill="#8DA2BF" font-size="10.5" font-family="'SF Mono','Noto Sans Mono',Menlo,Consolas,monospace">yes/no &#916;</text>
+
+  <rect x="516" y="398" width="72" height="88" rx="6" fill="#A78BFA" fill-opacity="0.07" stroke="#A78BFA" stroke-opacity="0.45" stroke-width="1"/>
+  <text x="552" y="418" text-anchor="middle" fill="#DDD6FE" font-size="12" font-family="'SF Mono','Noto Sans Mono',Menlo,Consolas,monospace">B &#183; letter</text>
+  <rect x="528" y="458" width="9" height="6" fill="#C4B5FD" fill-opacity="0.4"/>
+  <rect x="541" y="438" width="9" height="26" fill="#C4B5FD" fill-opacity="0.75"/>
+  <rect x="554" y="450" width="9" height="14" fill="#C4B5FD" fill-opacity="0.5"/>
+  <rect x="567" y="454" width="9" height="10" fill="#C4B5FD" fill-opacity="0.4"/>
+  <text x="552" y="480" text-anchor="middle" fill="#8DA2BF" font-size="10.5" font-family="'SF Mono','Noto Sans Mono',Menlo,Consolas,monospace">letter mass</text>
+
+  <rect x="596" y="398" width="72" height="88" rx="6" fill="#A78BFA" fill-opacity="0.07" stroke="#A78BFA" stroke-opacity="0.45" stroke-width="1"/>
+  <text x="632" y="418" text-anchor="middle" fill="#DDD6FE" font-size="12" font-family="'SF Mono','Noto Sans Mono',Menlo,Consolas,monospace">B &#183; pair</text>
+  <rect x="608" y="460" width="9" height="4" fill="#C4B5FD" fill-opacity="0.4"/>
+  <rect x="621" y="440" width="9" height="24" fill="#C4B5FD" fill-opacity="0.7"/>
+  <rect x="634" y="452" width="9" height="12" fill="#C4B5FD" fill-opacity="0.5"/>
+  <rect x="647" y="456" width="9" height="8" fill="#C4B5FD" fill-opacity="0.4"/>
+  <text x="632" y="480" text-anchor="middle" fill="#8DA2BF" font-size="10.5" font-family="'SF Mono','Noto Sans Mono',Menlo,Consolas,monospace">yes/no &#916;</text>
+
+  <text x="592" y="498" text-anchor="middle" fill="#8DA2BF" font-size="11" font-family="'SF Mono','Noto Sans Mono',Menlo,Consolas,monospace">4 &#215; per-option distributions</text>
+
+  <!-- FUSION R4 -->
+  <rect x="712" y="330" width="104" height="96" rx="8" fill="#A78BFA" fill-opacity="0.08" stroke="#A78BFA" stroke-opacity="0.65" stroke-width="1.2" filter="url(#glow)"/>
+  <text x="764" y="352" text-anchor="middle" fill="#C4B5FD" font-size="12" font-family="'SF Mono','Noto Sans Mono',Menlo,Consolas,monospace" letter-spacing="1">FUSION</text>
+  <text x="764" y="384" text-anchor="middle" fill="#F1EEFF" font-size="22" font-weight="700" font-family="-apple-system,'Segoe UI',Roboto,'Noto Sans',Arial,sans-serif">R4</text>
+  <text x="764" y="406" text-anchor="middle" fill="#8DA2BF" font-size="11.5" font-family="'SF Mono','Noto Sans Mono',Menlo,Consolas,monospace">combine &#215;4 &#183; fit-free</text>
+
+  <!-- ROUTER R2 -->
+  <rect x="848" y="232" width="336" height="272" rx="8" fill="#22D3EE" fill-opacity="0.07" stroke="#22D3EE" stroke-opacity="0.70" stroke-width="1.2"/>
+  <text x="864" y="258" fill="#67E8F9" font-size="12" font-family="'SF Mono','Noto Sans Mono',Menlo,Consolas,monospace" letter-spacing="2">ROUTER &#183; R2 AGREEMENT</text>
+  <text x="864" y="278" fill="#8DA2BF" font-size="11.5" font-family="'SF Mono','Noto Sans Mono',Menlo,Consolas,monospace">fit-free &#183; no trained weights</text>
+  <rect x="864" y="290" width="304" height="60" rx="6" fill="#22D3EE" fill-opacity="0.05" stroke="#22D3EE" stroke-opacity="0.30" stroke-width="1"/>
+  <text x="880" y="314" fill="#E6EDF7" font-size="15" font-weight="600" font-family="-apple-system,'Segoe UI',Roboto,'Noto Sans',Arial,sans-serif">1 &#183; strict</text>
+  <text x="880" y="336" fill="#8DA2BF" font-size="11.5" font-family="'SF Mono','Noto Sans Mono',Menlo,Consolas,monospace">agree + margin &#8594; auto-release</text>
+  <rect x="864" y="360" width="304" height="60" rx="6" fill="#22D3EE" fill-opacity="0.05" stroke="#22D3EE" stroke-opacity="0.30" stroke-width="1"/>
+  <text x="880" y="384" fill="#E6EDF7" font-size="15" font-weight="600" font-family="-apple-system,'Segoe UI',Roboto,'Noto Sans',Arial,sans-serif">2 &#183; unanimous</text>
+  <text x="880" y="406" fill="#8DA2BF" font-size="11.5" font-family="'SF Mono','Noto Sans Mono',Menlo,Consolas,monospace">agree &#8594; auto-release</text>
+  <rect x="864" y="430" width="304" height="60" rx="6" fill="#22D3EE" fill-opacity="0.05" stroke="#22D3EE" stroke-opacity="0.30" stroke-width="1"/>
+  <text x="880" y="454" fill="#E6EDF7" font-size="15" font-weight="600" font-family="-apple-system,'Segoe UI',Roboto,'Noto Sans',Arial,sans-serif">3 &#183; split</text>
+  <text x="880" y="476" fill="#8DA2BF" font-size="11.5" font-family="'SF Mono','Noto Sans Mono',Menlo,Consolas,monospace">disagree &#8594; human review</text>
+
+  <!-- DECISION -->
+  <rect x="848" y="530" width="336" height="112" rx="8" fill="#94A3B8" fill-opacity="0.06" stroke="#22D3EE" stroke-opacity="0.45" stroke-width="1"/>
+  <text x="864" y="552" fill="#67E8F9" font-size="12" font-family="'SF Mono','Noto Sans Mono',Menlo,Consolas,monospace" letter-spacing="1">DECISION</text>
+  <text x="864" y="578" fill="#C7D3E8" font-size="12" font-family="'SF Mono','Noto Sans Mono',Menlo,Consolas,monospace">answer: "B"</text>
+  <text x="864" y="600" fill="#C7D3E8" font-size="12" font-family="'SF Mono','Noto Sans Mono',Menlo,Consolas,monospace">confidence: 0.91</text>
+  <text x="864" y="622" fill="#C7D3E8" font-size="12" font-family="'SF Mono','Noto Sans Mono',Menlo,Consolas,monospace">tier: strict &#183; auto: true</text>
+
+  <!-- HUMAN FALLBACK -->
+  <rect x="560" y="560" width="156" height="88" rx="8" fill="#F59E0B" fill-opacity="0.05" stroke="#F59E0B" stroke-opacity="0.55" stroke-width="1"/>
+  <text x="572" y="582" fill="#FBBF24" font-size="12" font-family="'SF Mono','Noto Sans Mono',Menlo,Consolas,monospace" letter-spacing="1">FALLBACK</text>
+  <text x="638" y="610" text-anchor="middle" fill="#E6EDF7" font-size="16" font-weight="600" font-family="-apple-system,'Segoe UI',Roboto,'Noto Sans',Arial,sans-serif">Human review</text>
+  <text x="638" y="632" text-anchor="middle" fill="#8DA2BF" font-size="12" font-family="'SF Mono','Noto Sans Mono',Menlo,Consolas,monospace">split / low conf</text>
+
+  <!-- LEGEND / FOOTER -->
+  <line x1="56" y1="692" x2="1184" y2="692" stroke="#94A3B8" stroke-opacity="0.15" stroke-width="1"/>
+  <line x1="56" y1="720" x2="92" y2="720" stroke="#7C8BA3" stroke-width="1.4"/>
+  <text x="100" y="724" fill="#7C8BA3" font-size="12" font-family="'SF Mono','Noto Sans Mono',Menlo,Consolas,monospace">data flow</text>
+  <line x1="200" y1="720" x2="236" y2="720" stroke="#F59E0B" stroke-width="1.4" stroke-dasharray="6,4"/>
+  <text x="244" y="724" fill="#7C8BA3" font-size="12" font-family="'SF Mono','Noto Sans Mono',Menlo,Consolas,monospace">fallback route</text>
+  <rect x="378" y="708" width="20" height="16" rx="3" fill="#A78BFA" fill-opacity="0.10" stroke="#A78BFA" stroke-opacity="0.60" stroke-width="1"/>
+  <text x="406" y="724" fill="#7C8BA3" font-size="12" font-family="'SF Mono','Noto Sans Mono',Menlo,Consolas,monospace">R4 = four readings &#183; R2 = agreement routing</text>
+  <text x="1184" y="724" text-anchor="end" fill="#7C8BA3" font-size="12" font-family="'SF Mono','Noto Sans Mono',Menlo,Consolas,monospace">evaluated on 7 public decision suites</text>
+</svg>
