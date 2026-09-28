@@ -14,7 +14,11 @@ Two readers × two readout structures. A single reading is one opinion; four rea
 
 ## Results so far
 
-Headline numbers on public decision suites (initial release; tables, coverage curves and caveats in [`docs/results.md`](docs/results.md)):
+![Coverage–accuracy: our R4/R2 vs other systems](assets/r4_vs_models_coverage.png)
+
+<sub>Coverage–accuracy curves. Left: DecisionBench vs official models. Middle: JevBench vs Jev. Right: three classification suites vs the best published cov@5% points of the open-reproduction family. Higher-left is better; the dotted line marks the 5% risk level (≥95% precision).</sub>
+
+Headline numbers on public decision suites (initial release; full tables and caveats in [`docs/results.md`](docs/results.md)):
 
 | Suite | items | R4 accuracy (full coverage) | coverage @ ≥95% precision | reference |
 |---|---:|---:|---:|---|
@@ -25,10 +29,6 @@ Headline numbers on public decision suites (initial release; tables, coverage cu
 | injection | 300 | **82.3%** | 53.7% | best published open repro: 86.0% |
 | typed-decisions | 2,000 | **71.8%** | 16.1% | Jev 1.13: 72.7% |
 | OpenSanctions (27B pass) | 9,800 | F1 **98.58** (letter) · 97.85 (pair) | — | Jev 1.13: 98.87 |
-
-![Coverage–accuracy: our R4/R2 vs other systems](assets/r4_vs_models_coverage.png)
-
-<sub>Coverage–accuracy curves. Left: DecisionBench vs official models. Middle: JevBench vs Jev. Right: three classification suites vs the best published cov@5% points of the open-reproduction family. Higher-left is better; the dotted line marks the 5% risk level (≥95% precision).</sub>
 
 ## Design invariants
 
