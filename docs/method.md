@@ -40,7 +40,7 @@ The router is fit-free; tiers and thresholds are the rule above. Coverage–accu
 
 ## Known limits (honest list)
 
-- **Equal-weight fusion dilutes weak readings.** On suites where one reading is markedly weaker (e.g., the 35B reader on DecisionBench; the pair readout at K = 20), equal-weight R4 can trail the best single reading at high-precision tiers. Quality-weighted fusion is roadmap work; the fit-free baseline ships first.
+- **Equal-weight fusion dilutes weak readings.** On suites where one reading is markedly weaker (e.g., the 35B reader on DecisionBench; the pair readout at K = 20), equal-weight R4 can trail the best single reading at high-precision tiers. The 2026-09-29 suite passes add further cases where the equal-weight fused score lands between the two readers rather than above both — spam-eval (35B·letter 72.9% vs 27B·letter 97.0%) and SciFact reranking (35B 59.3 vs 27B 77.5 nDCG@10). Quality-weighted fusion is roadmap work; the fit-free baseline ships first.
 - **The letter readout caps at K ≤ 26** (option letters); larger label sets need a different structure (e.g., span readout). The K = 20 suites are within range.
 - **Binary items (K = 2) make the two structures near-equivalent**, so R4's structural diversity adds little there; the two-reader diversity still applies.
 - Reference numbers for other systems are their published values on the same suites; protocol differences (each project's own harness vs the readouts here) are stated per suite in `docs/results.md`.

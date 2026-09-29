@@ -14,6 +14,10 @@ Two readers × two readout structures. A single reading is one opinion; four rea
 
 ## Results so far
 
+![TetraJev R4 coverage–accuracy across eight decision suites](assets/coverage_r4_all_suites.png)
+
+<sub>R4 (four-reading fusion) coverage–accuracy across all eight evaluated suites. Higher-left is better; dotted line = 5% risk.</sub>
+
 ![Coverage–accuracy: our R4/R2 vs other systems](assets/r4_vs_models_coverage.png)
 
 <sub>Coverage–accuracy curves. Left: DecisionBench vs official models. Middle: JevBench vs Jev. Right: three classification suites vs the best published cov@5% points of the open-reproduction family. Higher-left is better; the dotted line marks the 5% risk level (≥95% precision).</sub>
@@ -28,7 +32,10 @@ Headline numbers on public decision suites (initial release; full tables and cav
 | newsgroups | 299 | **76.6%** | 29.8% | best published open repro: 73.7% |
 | injection | 300 | **82.3%** | 53.7% | best published open repro: 86.0% |
 | typed-decisions | 2,000 | **71.8%** | 16.1% | Jev 1.13: 72.7% |
-| OpenSanctions (27B pass) | 9,800 | F1 **98.58** (letter) · 97.85 (pair) | — | Jev 1.13: 98.87 |
+| OpenSanctions pairs | 9,800 | **97.8%** (R4) | **99.6%** | Jev 1.13: F1 98.87 |
+| spam-eval | 5,733 | **96.4%** (R4) | **95.5%** | Jev 1.13: 98.6% |
+| RAG reranking · SciFact | 300 | nDCG@10 **74.8** (fused) | — | Jev 79.3 / NVIDIA 78.7 |
+| RAG reranking · XQuAD-en | 1,190 | nDCG@10 **98.8** (fused) | — | Jev 98.9 / NVIDIA 99.4 |
 
 ### Reference systems — DecisionBench bench-v4 (official runs)
 
@@ -96,7 +103,7 @@ assets/    architecture diagram · coverage figures
 
 ## Status & roadmap
 
-Initial release: scripts + aggregate results for seven public suites. **In progress:** spam-eval (5,733 messages), Jev RAG reranking (SciFact 300 / XQuAD-en 1,190 queries), and the second-reader pass for OpenSanctions — results will be updated in place. Roadmap: quality-weighted fusion (after the fit-free baseline), release-gate calibration reports, additional suites.
+Initial release plus the 2026-09-29 update: scripts + aggregate results for **eight decision suites and the RAG reranking pass**, both readers on every suite. Roadmap: quality-weighted fusion (equal-weight R4 dilutes when one reading is weak — see `docs/method.md`), release-gate calibration reports, additional suites.
 
 ## Reproducing
 

@@ -28,7 +28,7 @@ are written where you point `--out`.
 | OpenSanctions pairs | `run_osbench_ours.py` | paper test pairs 200–9,999; conflict-first entity instructions |
 | spam-eval | `run_spam_ours.py` | enriched email state (links / Reply-To / attachment metadata) |
 | RAG reranking | `run_rag_ours.py` | frozen top-20 candidate pools (SciFact / XQuAD-en); `prep_rag_data.py` prepares the corpora |
-| scoring & figures | `score_*.py`, `make_*.py` | Wilson intervals, coverage–accuracy curves, R4/R2 fusion comparison |
+| scoring, fusion & figures | `score_*.py`, `compute_*.py`, `make_*.py` | Wilson intervals, coverage–accuracy curves, R4/R2 fusion comparison, per-suite fusion recomputation |
 
 ## Sources & attribution
 
